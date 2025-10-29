@@ -90,6 +90,8 @@ struct DashboardView: View {
             .padding()
             .task {
                 //await hkManager.addSimulatorData() // Add mock data to the simulator Health app.
+                //await hkManager.fetchStepCount()
+                //await hkManager.fetchWeights()
                 isShowingPermissionPrimingSheet = !hasSeenPermissionPriming
             }
             .navigationTitle("Dashboard")
