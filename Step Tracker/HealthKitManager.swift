@@ -31,13 +31,17 @@ import Observation
                                                               anchorDate: endDate,
                                                               intervalComponents: .init(day: 1))
         
-        let stepCounts = try! await stepQuery.result(for: store)
-        stepData = stepCounts.statistics().map {
-            .init(date: $0.startDate, value: $0.sumQuantity()?.doubleValue(for: .count()) ?? 0 )
-        }
-        
-        for steps in stepCounts.statistics() {
-            print(steps.sumQuantity() ?? 0)
+        do {
+            let stepCounts = try await stepQuery.result(for: store)
+            stepData = stepCounts.statistics().map {
+                .init(date: $0.startDate, value: $0.sumQuantity()?.doubleValue(for: .count()) ?? 0 )
+            }
+            
+            for steps in stepCounts.statistics() {
+                print(steps.sumQuantity() ?? 0)
+            }
+        } catch {
+            
         }
     }
     
@@ -54,13 +58,17 @@ import Observation
                                                               anchorDate: endDate,
                                                               intervalComponents: .init(day: 1))
         
-        let weights = try! await weightQuery.result(for: store)
-        weightData = weights.statistics().map {
-            .init(date: $0.startDate, value: $0.mostRecentQuantity()?.doubleValue(for: .pound()) ?? 0)
-        }
-        
-        for weight in weights.statistics() {
-            print(weight.mostRecentQuantity()?.doubleValue(for: .pound()) ?? 0)
+        do {
+            let weights = try await weightQuery.result(for: store)
+            weightData = weights.statistics().map {
+                .init(date: $0.startDate, value: $0.mostRecentQuantity()?.doubleValue(for: .pound()) ?? 0)
+            }
+            
+            for weight in weights.statistics() {
+                print(weight.mostRecentQuantity()?.doubleValue(for: .pound()) ?? 0)
+            }
+        } catch {
+            
         }
     }
     
